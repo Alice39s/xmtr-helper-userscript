@@ -7,7 +7,7 @@
 // @name:zh-HK         xmtr IPMap 助手
 // @name:zh-MO         xmtr IPMap 助手
 // @namespace          https://xmsl.dev/
-// @version            0.0.3
+// @version            0.0.4
 // @description        Adds an "Open in xmsl.dev IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:en     Adds an "Open in xmsl.dev IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:zh-CN  在 Looking Glass 网站的 traceroute 与 MTR 结果旁添加「在 xmsl.dev IPMap 中打开」按钮。
@@ -36,6 +36,8 @@
 // @match              *://ping.sx/*
 // @match              https://*.vultr.com/*
 // @match              *://lg.zayo.com/*
+// @require            https://fastly.jsdelivr.net/npm/core-js-bundle@3.51.0/minified.js#sha256-Q3VXb08dPJxZgqOrxWWvFMs53LLkE+vvMSox+5TpRuw=
+// @require            https://fastly.jsdelivr.net/npm/pako@3.0.3/dist/browser/pako_deflate.umd.min.js#sha256-Mh0i/Llv9N0SMNiyN3RqvJ7Q0gxtW5IChh+mX7MKqRA=
 // @connect            xmsl.dev
 // @connect            *.xmsl.dev
 // @connect            api.globalping.io

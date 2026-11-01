@@ -10,6 +10,7 @@ This branch holds the built userscript. `xmtr-helper.user.js` and `xmtr-helper.m
 
 - A userscript manager: [Tampermonkey](https://www.tampermonkey.net/), [Violentmonkey](https://violentmonkey.github.io/), [ScriptCat](https://docs.scriptcat.org/) or [Greasemonkey](https://www.greasespot.net/) 4.
 - Chrome 55, Firefox 52 ESR, Safari 10.1, Edge 79 or later, which covers the browsers still found on Windows 7.
+- The manager downloads core-js and pako from jsDelivr (`fastly.jsdelivr.net`) with the script and checks each file against the SHA-256 hash in its `@require` line.
 
 On Globalping, the first click asks to allow requests to `api.globalping.io`, where the script reads the measurement.
 
