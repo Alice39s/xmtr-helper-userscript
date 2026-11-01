@@ -7,14 +7,14 @@
 // @name:zh-HK         xmtr IPMap 助手
 // @name:zh-MO         xmtr IPMap 助手
 // @namespace          https://xmsl.dev/
-// @version            0.0.2
-// @description        Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
-// @description:en     Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
-// @description:zh-CN  在 Looking Glass 网站的 traceroute 与 MTR 结果旁添加「在 xmtr IPMap 中打开」按钮。
-// @description:ja     Looking Glass サイトの traceroute・MTR の結果に「xmtr IPMap で開く」ボタンを追加します。
-// @description:zh-TW  在 Looking Glass 網站的 traceroute 與 MTR 結果旁新增「在 xmtr IPMap 中開啟」按鈕。
-// @description:zh-HK  在 Looking Glass 網站的 traceroute 與 MTR 結果旁添加「在 xmtr IPMap 中打開」按鈕。
-// @description:zh-MO  在 Looking Glass 網站的 traceroute 與 MTR 結果旁添加「在 xmtr IPMap 中打開」按鈕。
+// @version            0.0.3
+// @description        Adds an "Open in xmsl.dev IPMap" button to traceroute and MTR results on looking glass sites.
+// @description:en     Adds an "Open in xmsl.dev IPMap" button to traceroute and MTR results on looking glass sites.
+// @description:zh-CN  在 Looking Glass 网站的 traceroute 与 MTR 结果旁添加「在 xmsl.dev IPMap 中打开」按钮。
+// @description:ja     Looking Glass サイトの traceroute・MTR の結果に「xmsl.dev IPMap で開く」ボタンを追加します。
+// @description:zh-TW  在 Looking Glass 網站的 traceroute 與 MTR 結果旁新增「在 xmsl.dev IPMap 中開啟」按鈕。
+// @description:zh-HK  在 Looking Glass 網站的 traceroute 與 MTR 結果旁添加「在 xmsl.dev IPMap 中打開」按鈕。
+// @description:zh-MO  在 Looking Glass 網站的 traceroute 與 MTR 結果旁添加「在 xmsl.dev IPMap 中打開」按鈕。
 // @icon               https://xmsl.dev/favicon.ico
 // @homepageURL        https://github.com/Alice39s/xmtr-helper-userscript
 // @downloadURL        https://alice39s.github.io/xmtr-helper-userscript/xmtr-helper.user.js
