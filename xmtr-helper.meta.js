@@ -7,7 +7,7 @@
 // @name:zh-HK         xmtr IPMap 助手
 // @name:zh-MO         xmtr IPMap 助手
 // @namespace          https://xmsl.dev/
-// @version            0.0.1
+// @version            0.0.2
 // @description        Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:en     Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:zh-CN  在 Looking Glass 网站的 traceroute 与 MTR 结果旁添加「在 xmtr IPMap 中打开」按钮。

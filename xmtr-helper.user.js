@@ -7,7 +7,7 @@
 // @name:zh-HK         xmtr IPMap 助手
 // @name:zh-MO         xmtr IPMap 助手
 // @namespace          https://xmsl.dev/
-// @version            0.0.1
+// @version            0.0.2
 // @description        Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:en     Adds an "Open in xmtr IPMap" button to traceroute and MTR results on looking glass sites.
 // @description:zh-CN  在 Looking Glass 网站的 traceroute 与 MTR 结果旁添加「在 xmtr IPMap 中打开」按钮。
@@ -8633,7 +8633,7 @@
 		const button = document.createElement("button");
 		button.type = "button";
 		if (appearance.className) button.className = appearance.className;
-		else button.dataset.theme = "default";
+		if (!appearance.className && !appearance.css) button.dataset.theme = "default";
 		const icon = createElement(Route);
 		icon.setAttribute("aria-hidden", "true");
 		const label = document.createElement("span");
@@ -8671,6 +8671,7 @@
 		});
 		scan();
 	}
+	var button_default$12 = "[data-xmtr-helper]{vertical-align:top;margin-left:8px}[data-xmtr-helper]>button>svg{width:12px;height:12px;margin-right:4px}[data-xmtr-helper]>button[data-state=failed]{color:var(--red,#e5484d)}";
 	var import_ipaddr = __toESM(__commonJSMin(((exports, module, this$1) => {
 		(function(root) {
 			"use strict";
@@ -9938,10 +9939,9 @@
 		site: () => site$12,
 		start: () => start$12
 	});
+	var BUTTON_CLASS$3 = "ce-idx-btn-link";
 	function placeButton$6(block, button) {
 		const title = block.querySelector(".ce-idx-trace-detail-title, [class*=\"detail-title\"]");
-		button.style.height = "20px";
-		button.style.marginLeft = "8px";
 		(title !== null && title !== void 0 ? title : block).append(button);
 	}
 	function start$12() {
@@ -9949,9 +9949,13 @@
 			if (!isResultTable$1(table)) return;
 			const block = resultBlock$5(table);
 			if (!hasHops$1(block) || isRunning$5(block)) return;
-			mountOpenButton(block, () => readResult$6(block), (button) => placeButton$6(block, button));
+			mountOpenButton(block, () => readResult$6(block), (button) => placeButton$6(block, button), {
+				className: BUTTON_CLASS$3,
+				css: button_default$12
+			});
 		});
 	}
+	var button_default$11 = "[data-xmtr-helper]{margin-right:8px}[data-xmtr-helper]>button>svg{width:12px;height:12px;margin-right:4px}[data-xmtr-helper]>button[data-state=failed]{color:#ef5735}";
 	var RESULT_SELECTOR$2 = ".teamix-pro-card, .show-detection-data .next-card";
 	var EXPAND_SELECTOR = "[class*=\"card-title-collapse\"], [class*=\"title-collapse\"]";
 	var BLOCK_SELECTOR = ".show-detection-data";
@@ -10275,6 +10279,7 @@
 		site: () => site$11,
 		start: () => start$11
 	});
+	var BUTTON_CLASS$2 = "next-btn next-medium next-btn-primary next-btn-text";
 	var HOP_TIMEOUT_MS = 2e3;
 	function waitForHops(card) {
 		if (hasHops(card)) return Promise.resolve();
@@ -10322,9 +10327,13 @@
 		watchElements(RESULT_SELECTOR$2, (card) => {
 			if (isMeasuring(document)) return;
 			if (!isResultCard(card)) return;
-			mountOpenButton(card, () => readCard$1(card), (button) => placeButton$5(card, button));
+			mountOpenButton(card, () => readCard$1(card), (button) => placeButton$5(card, button), {
+				className: BUTTON_CLASS$2,
+				css: button_default$11
+			});
 		});
 	}
+	var button_default$10 = "[data-xmtr-helper]>button{color:inherit;background:#f9fafb;border:1px solid #d1d5db;margin-top:8px;padding:6px 12px;transition:background-color .15s ease-out,border-color .15s ease-out}[data-xmtr-helper]>button:hover{background:#f3f4f6;border-color:#9ca3af}div.bg-orange-400 [data-xmtr-helper]>button,div.bg-blue-500 [data-xmtr-helper]>button,div.bg-black [data-xmtr-helper]>button{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.55)}div.bg-orange-400 [data-xmtr-helper]>button:hover,div.bg-blue-500 [data-xmtr-helper]>button:hover,div.bg-black [data-xmtr-helper]>button:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.85)}[data-xmtr-helper]>button:focus-visible{outline-offset:2px;outline:2px solid #fb923c}html.dark [data-xmtr-helper]>button:focus-visible{outline-color:#60a5fa}[data-xmtr-helper]>button:disabled{opacity:.6;cursor:progress}[data-xmtr-helper]>button[data-state=failed],div.bg-orange-400 [data-xmtr-helper]>button[data-state=failed],div.bg-blue-500 [data-xmtr-helper]>button[data-state=failed],div.bg-black [data-xmtr-helper]>button[data-state=failed]{color:#ef4444;background:#fef2f2;border-color:#ef4444}[data-xmtr-helper]>button>svg{width:16px;height:16px;margin-right:8px}@media (prefers-reduced-motion:reduce){[data-xmtr-helper]>button{transition:none}}";
 	var HEADER = /^traceroute6?\s+to\s+(\S+)(?:\s+\(([^)]+)\))?(?:,|\s+from\s)/i;
 	var WINDOWS_HEADER = /^tracing route to\s+(\S+?)(?:\s+\[([^\]]+)\])?(?:\s|$)/i;
 	var HOP = /^(\d+)\s+(.+)$/;
@@ -10570,6 +10579,7 @@
 		start: () => start$10
 	});
 	var OUTPUT = "#output";
+	var BUTTON_CLASS$1 = "inline-flex items-center rounded-md text-sm font-medium shadow-sm";
 	var RUNNING_MARK$1 = "[x-show*=\"inprogress\"], [class*=spinner], [class*=loading], [aria-busy=true], progress";
 	var RUNNING_NOTICE = "[role=status], [aria-live], .notice, .alert, .status, [x-show], .spinner, .loading";
 	var RUNNING_TEXT$2 = /(?:\brunning\b|\btracing\b|\bin progress\b|检测中|运行中)/i;
@@ -10608,9 +10618,9 @@
 	function start$10() {
 		watchElements(OUTPUT, (block) => {
 			if (!isTracerouteOutput(block)) return;
-			mountOpenButton(block, () => readTrace$4(block, probeOf(block)), (button) => {
-				button.style.margin = "8px 0";
-				block.append(button);
+			mountOpenButton(block, () => readTrace$4(block, probeOf(block)), (button) => block.append(button), {
+				className: BUTTON_CLASS$1,
+				css: button_default$10
 			});
 			refresh(block);
 		});
@@ -10620,6 +10630,7 @@
 			}, 0);
 		});
 	}
+	var button_default$9 = "[data-xmtr-helper]{margin-left:8px}[data-xmtr-helper]>button{font-family:inherit}[data-xmtr-helper]>button[data-state=failed]{color:#ef5656;border-color:#ef5656}";
 	var RESULT_SELECTOR$1 = "table";
 	var HEADER_NAMES = [
 		["ttl", [
@@ -10962,10 +10973,10 @@
 		site: () => site$9,
 		start: () => start$9
 	});
+	var BUTTON_CLASS = "btn btn-mini";
 	var ACTIONS = ".one_info_text";
 	function placeButton$4(result, button) {
 		const page = result.ownerDocument;
-		button.style.marginLeft = "12px";
 		for (const host of page.querySelectorAll(`${ACTIONS} > [${BUTTON_HOST_ATTRIBUTE}]`)) if (host !== button) host.remove();
 		const actions = page.querySelector(ACTIONS);
 		const refresh = actions === null || actions === void 0 ? void 0 : actions.querySelector(".action_refresh");
@@ -10984,9 +10995,13 @@
 				removeButtons(result.ownerDocument);
 				return;
 			}
-			mountOpenButton(result, () => readResult$4(result), (button) => placeButton$4(result, button));
+			mountOpenButton(result, () => readResult$4(result), (button) => placeButton$4(result, button), {
+				className: BUTTON_CLASS,
+				css: button_default$9
+			});
 		});
 	}
+	var button_default$8 = "[data-xmtr-helper]>button.btn02{border:0;border-radius:4px;height:28px;margin-left:8px;padding:0 12px;font-family:Microsoft YaHei,sans-serif;font-size:14px;line-height:1}[data-xmtr-helper]>button.btn02>svg{width:1em;height:1em;margin-right:.3em}[data-xmtr-helper]>button.btn02[data-state=failed],[data-xmtr-helper]>button.btn02[data-state=failed]:hover{opacity:1;background:#ff2626}";
 	var NO_REPLY$6 = /^(?:[*?\-–—]+|n\/?a|timeout|unknown|未知|请求超时|超时|无响应)?$/i;
 	var HEADERS$5 = [
 		["location", /地理位置|所在地|位置|地区|location|geo/],
@@ -11127,6 +11142,10 @@
 		start: () => start$8
 	});
 	var BLOCK$1 = "ul";
+	var APPEARANCE$2 = {
+		className: "btn02",
+		css: button_default$8
+	};
 	function placeButton$3(result, button) {
 		const header = headerLine(result);
 		const name = header ? [...header.querySelectorAll("span")][1] : void 0;
@@ -11142,9 +11161,10 @@
 			mountOpenButton(result, () => {
 				var _pageTarget;
 				return readResult$3(result, (_pageTarget = pageTarget$1(document)) !== null && _pageTarget !== void 0 ? _pageTarget : target);
-			}, (button) => placeButton$3(result, button));
+			}, (button) => placeButton$3(result, button), APPEARANCE$2);
 		});
 	}
+	var button_default$7 = "[data-xmtr-helper]>button{transition:background-color .1s ease-in-out}[data-xmtr-helper]>button:hover{background:#f9fafb}[data-xmtr-helper]>button:focus-visible{outline-offset:2px;outline:2px solid #17d4a7}[data-xmtr-helper]>button>svg{width:14px;height:14px;margin-right:6px}[data-xmtr-helper]>button[data-state=failed]{color:#a94442;border-color:#ebccd1}@media (prefers-reduced-motion:reduce){[data-xmtr-helper]>button{transition:none}}";
 	var CONTROLS_SELECTOR = "[class*=\"metrics-controls\"]";
 	var COLLAPSE_SELECTOR = "[class*=\"dropdown\"]";
 	var ROUTE_TYPES = new Set(["traceroute", "mtr"]);
@@ -11392,6 +11412,7 @@
 	});
 	var API = "https://api.globalping.io/v1/measurements";
 	var REQUEST_TIMEOUT_MS = 15e3;
+	var CHIP_CLASS = "c-gp-results-raw-output_list_item_header_metrics-controls_metric";
 	function fetchMeasurement(_x) {
 		return _fetchMeasurement.apply(this, arguments);
 	}
@@ -11432,9 +11453,13 @@
 		watchElements("pre", (output) => {
 			const card = resultCard(output);
 			if (!card || !isResultReady(card)) return;
-			mountOpenButton(card, () => readCard(card), (button) => placeButton$2(card, button));
+			mountOpenButton(card, () => readCard(card), (button) => placeButton$2(card, button), {
+				className: CHIP_CLASS,
+				css: button_default$7
+			});
 		});
 	}
+	var button_default$6 = "[data-xmtr-helper]{display:block}[data-xmtr-helper]>button{all:unset;box-sizing:border-box;color:#000;white-space:nowrap;cursor:default;background:#efefef;border:2px outset #000;border-radius:0;align-items:center;height:21.5px;margin:8px 0;padding:1px 6px;font:13.3333px Arial,sans-serif;display:inline-flex}[data-xmtr-helper]>button:hover{background:#efefef;border-color:#000}[data-xmtr-helper]>button>svg{width:14px;height:14px;margin-right:4px}[data-xmtr-helper]>button:active{border-style:inset}[data-xmtr-helper]>button:focus-visible{outline:-webkit-focus-ring-color auto 1px}[data-xmtr-helper]>button:disabled{color:rgba(16,16,16,.3);cursor:progress;background:rgba(239,239,239,.3);border-color:rgba(118,118,118,.3)}[data-xmtr-helper]>button[data-state=failed]{color:maroon;background:#efefef;border-color:maroon}";
 	var RESULT_SELECTOR = "#lg_return";
 	var COMMAND = /\btraceroute6?\b(?:\s+ipv(?:4|6))?\s+(\S+)/i;
 	var CAPTION_ROUTER = /^(\S+?)\s*>/;
@@ -11685,7 +11710,6 @@
 		start: () => start$6
 	});
 	function place$2(result, button) {
-		button.style.margin = "8px 0";
 		const table = findHopTable(result);
 		if (table) table.after(button);
 		else result.append(button);
@@ -11696,9 +11720,10 @@
 			const show = readRoute$1(result) !== void 0 && !isRunningResult(result);
 			if (mounted instanceof HTMLElement) mounted.hidden = !show;
 			if (!show) return;
-			mountOpenButton(result, () => readTrace$3(result), (button) => place$2(result, button));
+			mountOpenButton(result, () => readTrace$3(result), (button) => place$2(result, button), { css: button_default$6 });
 		});
 	}
+	var button_default$5 = "[data-xmtr-helper]>button.badge{border:0;font-size:12px;line-height:17px}[data-xmtr-helper]>button.badge:hover{color:#dae6ff;background:#4680ff}[data-xmtr-helper]>button.badge>svg{width:1em;height:1em;margin-right:.25em}[data-xmtr-helper]>button.badge[data-state=failed],[data-xmtr-helper]>button.badge[data-state=failed]:hover{color:#ff5252;background:rgba(255,82,82,.2)}@media (prefers-reduced-motion:reduce){[data-xmtr-helper]>button.badge{transition:none}}";
 	var NO_REPLY$4 = /^(?:[*?\-–—]+|n\/?a|timeout|unknown|请求超时|超时|无响应)?$/i;
 	var HEADERS$3 = [
 		["location", /地理位置|所在地|位置|地区|location|geo/],
@@ -11892,6 +11917,10 @@
 		if (marked) return marked;
 		return [...table.querySelectorAll("tr")].find((row) => /目标\s*(?:IP|地址)/.test(cellText(row)));
 	}
+	var APPEARANCE$1 = {
+		className: "badge badge-light-primary",
+		css: button_default$5
+	};
 	function place$1(button, table) {
 		const summary = summaryLine(table);
 		if (!summary) {
@@ -11906,9 +11935,10 @@
 	function start$5() {
 		watchElements(TABLE, (table) => {
 			if (!isTraceTable(table) || !isFinished$1(table)) return;
-			mountOpenButton(table, () => readResult$2(table), (button) => place$1(button, table));
+			mountOpenButton(table, () => readResult$2(table), (button) => place$1(button, table), APPEARANCE$1);
 		});
 	}
+	var button_default$4 = "[data-xmtr-helper]>button{height:24px;padding:0 12px}[data-xmtr-helper]>button>svg{width:16px;height:16px;margin-right:6px}[data-xmtr-helper]>button[data-state=failed]{background-color:#e02424}[data-xmtr-helper]>button[data-state=failed]:hover{background-color:#f05252}";
 	var HEADERS$2 = [
 		["lossPct", /^(loss|loss%|丢包)/i],
 		["sent", /^(snt|sent|发送)/i],
@@ -12124,6 +12154,7 @@
 		start: () => start$4
 	});
 	var REPORT = "pre";
+	var ACTION = "px-3 py-1 text-sm bg-blue-600 hover:bg-blue-500 rounded transition-colors";
 	function placeButton$1(result, button) {
 		var _actionsRow;
 		(_actionsRow = actionsRow(result)) === null || _actionsRow === void 0 || _actionsRow.prepend(button);
@@ -12132,9 +12163,13 @@
 		watchElements(REPORT, (report) => {
 			const result = resultBlock$3(report);
 			if (!result || !isFinished(result)) return;
-			mountOpenButton(result, () => readResult$1(result, new URL(location.href)), (button) => placeButton$1(result, button));
+			mountOpenButton(result, () => readResult$1(result, new URL(location.href)), (button) => placeButton$1(result, button), {
+				className: ACTION,
+				css: button_default$4
+			});
 		});
 	}
+	var button_default$3 = "[data-xmtr-helper]>button{all:unset;box-sizing:border-box;color:#f0f0f0;cursor:pointer;align-items:center;font:400 13px/21px Roboto Mono,Consolas,Courier New,Courier,monospace;display:inline-flex}[data-xmtr-helper]>button:before,[data-xmtr-helper]>button:after{color:gray}[data-xmtr-helper]>button:before{content:\"[\"}[data-xmtr-helper]>button:after{content:\"]\"}[data-xmtr-helper]>button>span{text-decoration:underline}[data-xmtr-helper]>button>svg{width:1.15em;height:1.15em;margin:0 .35em 0 .2em}[data-xmtr-helper]>button:focus-visible{outline-offset:2px;outline:2px solid #30e050}[data-xmtr-helper]>button[data-state=failed]{color:#f0e0e0;background:#600000;border:1px solid #703030;border-radius:3px;padding:0 4px}[data-xmtr-helper]>button[data-state=failed]:before,[data-xmtr-helper]>button[data-state=failed]:after{color:#f0e0e0}.xmtr-helper-actions{padding:3px 0 6px}";
 	var METADATA_SELECTOR = "#snapshot-metadata";
 	var TARGET_SELECTOR = "[data-target-host-resolved], [data-target-host]";
 	var REPORT_SELECTOR = "pre, [class*=\"mtr_report\"]";
@@ -12443,6 +12478,7 @@
 		start: () => start$3
 	});
 	var ACTIONS_CLASS = "xmtr-helper-actions";
+	var APPEARANCE = { css: button_default$3 };
 	function actionsFor(block) {
 		const added = block.querySelector("." + ACTIONS_CLASS);
 		if (added) return added;
@@ -12450,7 +12486,6 @@
 		if (!report) return null;
 		const actions = block.ownerDocument.createElement("div");
 		actions.className = ACTIONS_CLASS;
-		actions.style.padding = "2px 0 6px";
 		report.before(actions);
 		return actions;
 	}
@@ -12463,9 +12498,10 @@
 				const actions = actionsFor(block);
 				if (!actions) return;
 				actions.append(button);
-			});
+			}, APPEARANCE);
 		});
 	}
+	var button_default$2 = "[data-xmtr-helper]>button>svg{width:12px;height:12px;margin-right:0}[data-xmtr-helper]>button[data-state=failed]{border-color:var(--destructive);color:var(--destructive)}";
 	var NO_REPLY$1 = new Set([
 		"",
 		"*",
@@ -12713,12 +12749,17 @@
 		site: () => site$2,
 		start: () => start$2
 	});
+	var PILL = [
+		"inline-flex w-fit shrink-0 items-center justify-center gap-1 rounded-none border py-0.5 px-2",
+		"font-mono text-[0.6875rem] font-medium tracking-[0.02em] whitespace-nowrap transition-all",
+		"outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+		"border-primary/50 bg-transparent text-primary hover:border-primary hover:bg-accent",
+		"hover:text-accent-foreground h-5"
+	].join(" ");
 	function placeButton(result, button) {
 		var _badge$parentElement;
 		const badge = result.querySelector("[data-slot*=\"badge\"], [class*=\"badge\"]");
 		const statusRow = (_badge$parentElement = badge === null || badge === void 0 ? void 0 : badge.parentElement) !== null && _badge$parentElement !== void 0 ? _badge$parentElement : headingOf(result);
-		button.style.height = "20px";
-		button.style.alignItems = "center";
 		(statusRow !== null && statusRow !== void 0 ? statusRow : result).append(button);
 	}
 	function start$2() {
@@ -12726,9 +12767,13 @@
 			if (!isMtrTable(table)) return;
 			const result = resultBlock$1(table);
 			if (!isComplete(result)) return;
-			mountOpenButton(result, () => readResult(result, new URL(location.href)), (button) => placeButton(result, button));
+			mountOpenButton(result, () => readResult(result, new URL(location.href)), (button) => placeButton(result, button), {
+				className: PILL,
+				css: button_default$2
+			});
 		});
 	}
+	var button_default$1 = "[data-xmtr-helper]>button{margin:8px 16px 16px}[data-xmtr-helper]>button>svg{width:24px;height:24px;margin-right:10px}[data-xmtr-helper]>button[data-state=failed]{background-color:#f55656}[data-xmtr-helper]>button[data-state=failed]:hover,[data-xmtr-helper]>button[data-state=failed]:focus{background-color:#f77d7d}";
 	var HEADERS = [
 		["lossPct", /^(loss|loss%|丢包)/i],
 		["sent", /^(snt|sent|发送)/i],
@@ -13035,9 +13080,9 @@
 		start: () => start$1
 	});
 	var RESULT = "#results, #results_wrapper, #response";
+	var BUTTON = "btn btn--primary";
 	function place(block, button) {
 		const result = block.querySelector("#response");
-		button.style.margin = "8px 0 8px 10px";
 		if (result) result.after(button);
 		else block.append(button);
 	}
@@ -13051,9 +13096,13 @@
 				return;
 			}
 			if (mounted instanceof HTMLElement) mounted.hidden = false;
-			mountOpenButton(block, () => readTrace$1(block, readProbe$1(document.querySelector("#serverlocation")), new URL(location.href)), (button) => place(block, button));
+			mountOpenButton(block, () => readTrace$1(block, readProbe$1(document.querySelector("#serverlocation")), new URL(location.href)), (button) => place(block, button), {
+				className: BUTTON,
+				css: button_default$1
+			});
 		});
 	}
+	var button_default = "[data-xmtr-helper]>button{all:unset;box-sizing:border-box;color:#222;white-space:nowrap;cursor:pointer;background:#efefef;border:2px outset #000;border-radius:0;align-items:center;height:28.5px;margin:8px 0;padding:1px 6px;font:16px sans-serif;display:inline-flex}[data-xmtr-helper]>button:hover{background:#efefef;border-color:#000}[data-xmtr-helper]>button:active{border-style:inset}[data-xmtr-helper]>button:focus-visible{outline:-webkit-focus-ring-color auto 1px}[data-xmtr-helper]>button>svg{width:16px;height:16px;margin-right:5px}[data-xmtr-helper]>button:disabled{color:rgba(16,16,16,.3);cursor:progress;background:rgba(239,239,239,.3);border-color:rgba(118,118,118,.3)}[data-xmtr-helper]>button[data-state=failed]{color:#db2828;background:#efefef;border-color:#db2828}";
 	var ROUTE_TOOL = /^traceroute6?$/i;
 	var PROBE_LABEL = /^(?:router|node|server|location|pop)$/i;
 	var COMMAND_LABEL = /^(?:command|query|tool)$/i;
@@ -13144,10 +13193,7 @@
 			var _pre$closest;
 			const block = (_pre$closest = pre.closest(BLOCK)) !== null && _pre$closest !== void 0 ? _pre$closest : pre.parentElement;
 			if (!block || !isRouteBlock(block)) return;
-			mountOpenButton(block, () => readTrace(block), (button) => {
-				button.style.margin = "8px 0";
-				pre.after(button);
-			});
+			mountOpenButton(block, () => readTrace(block), (button) => pre.after(button), { css: button_default });
 		});
 	}
 	var _MatchPattern = class MatchPattern {
